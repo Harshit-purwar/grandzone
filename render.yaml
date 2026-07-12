@@ -5,7 +5,7 @@ services:
     region: oregon
     plan: free
     buildCommand: cd server && npm install && npm run build
-    startCommand: cd server && npx prisma db push --skip-generate --accept-data-loss && npx tsx prisma/seed.ts; npm start
+    startCommand: cd server && npm start
     envVars:
       - key: DATABASE_URL
         value: postgresql://postgres.vmgtlbqxhxxtdoceobue:Supabas8118@aws-1-ap-south-1.pooler.supabase.com:6543/postgres
