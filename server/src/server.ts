@@ -31,7 +31,13 @@ app.use('/api/banners', bannerRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', message: 'GrandZone API is running' });
+  const hasCloudinary = !!(process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET);
+  res.json({ 
+    status: 'ok', 
+    message: 'GrandZone API is running',
+    cloudinary: hasCloudinary ? 'configured' : 'not configured',
+    cloudinaryName: process.env.CLOUDINARY_CLOUD_NAME ? `${process.env.CLOUDINARY_CLOUD_NAME.substring(0, 3)}***` : 'not set'
+  });
 });
 
 // Error handling middleware

@@ -63,9 +63,9 @@ export const uploadImage = async (req: Request, res: Response) => {
       const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
       return res.json({ url: imageUrl });
     }
-  } catch (error) {
-    console.error('Upload error:', error);
-    return res.status(500).json({ error: 'Upload failed.' });
+  } catch (error: any) {
+    console.error('Upload error:', error?.message || error);
+    return res.status(500).json({ error: 'Upload failed.', details: error?.message || 'Unknown error' });
   }
 };
 
