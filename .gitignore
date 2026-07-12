@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+server/dist/
+
+# Database
+server/prisma/dev.db
+server/prisma/dev.db-journal
+
+# Environment
+.env
+.env.local
+
+# Uploads
+server/uploads/*
+!server/uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel-tmp/
+
+# Misc
+*.log
+.vercel
