@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Admin {
@@ -31,7 +31,7 @@ model Product {
   id          String   @id @default(uuid())
   name        String
   description String?
-  images      String   // JSON array of image paths
+  images      String
   categoryId  String
   brand       String?
   mrp         Float
@@ -54,7 +54,7 @@ model Order {
   pincode     String
   landmark    String?
   totalAmount Float
-  status      String      @default("Pending") // Pending, Confirmed, Delivered, Cancelled
+  status      String      @default("Pending")
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   items       OrderItem[]
