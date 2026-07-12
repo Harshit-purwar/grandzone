@@ -33,7 +33,8 @@ export const upload = multer({ storage, fileFilter, limits: { fileSize: 5 * 1024
 export const uploadImage = (req: Request, res: Response) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded.' });
-    const imageUrl = `/uploads/${req.file.filename}`;
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
     return res.json({ url: imageUrl });
   } catch (error) {
     return res.status(500).json({ error: 'Upload failed.' });
@@ -45,7 +46,8 @@ export const uploadImages = (req: Request, res: Response) => {
   try {
     const files = req.files as Express.Multer.File[];
     if (!files || files.length === 0) return res.status(400).json({ error: 'No files uploaded.' });
-    const urls = files.map(f => `/uploads/${f.filename}`);
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    const urls = files.map(f => `${baseUrl}/uploads/${f.filename}`);
     return res.json({ urls });
   } catch (error) {
     return res.status(500).json({ error: 'Upload failed.' });
