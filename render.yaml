@@ -8,7 +8,7 @@ services:
     startCommand: cd server && npx prisma db push --skip-generate --accept-data-loss && npx tsx prisma/seed.ts; npm start
     envVars:
       - key: DATABASE_URL
-        value: postgresql://postgres:Supabas8118@db.vmgtlbqxhxxtdoceobue.supabase.co:5432/postgres?sslmode=require
+        value: postgresql://postgres.vmgtlbqxhxxtdoceobue:Supabas8118@aws-1-ap-south-1.pooler.supabase.com:6543/postgres
       - key: JWT_SECRET
         generateValue: true
       - key: PORT
