@@ -8,6 +8,33 @@ services:
     startCommand: cd server && npm start
     envVars:
       - key: DATABASE_URL
+        value: file:/opt/render/project/src/server/prisma/data/prod.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PORT
+        value: 5000
+      - key: CLIENT_URL
+        value: https://grandzone.vercel.app
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/server/prisma/data
+      sizeGB: 1
+services:
+  - type: web
+    name: grandzone-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd server && npm install && npm run build && npx prisma migrate deploy
+    startCommand: cd server && npm start
+    envVars:
+      - key: DATABASE_URL
         value: file:./data/prod.db
       - key: JWT_SECRET
         generateValue: true
